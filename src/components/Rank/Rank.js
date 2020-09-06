@@ -3,12 +3,11 @@ const Rank = () => {
   return (
     <div
       style={{
+        width: 200,
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        backgroundColor: "rgba(10,10,10,.2)",
-        borderRadius: 20,
-        padding: 10,
+        fontFamily: "monospace",
       }}
     >
       <div className="white f3">{"Berto, your current rank is..."}</div>

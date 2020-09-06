@@ -1,14 +1,51 @@
-.form{
-    width:700px;
-    background:
-radial-gradient(circle at 50% 59%, #D2CAAB 3%, #364E27 4%, #364E27 11%, rgba(54,78,39,0) 12%, rgba(54,78,39,0)) 50px 0,
-radial-gradient(circle at 50% 41%, #364E27 3%, #D2CAAB 4%, #D2CAAB 11%, rgba(210,202,171,0) 12%, rgba(210,202,171,0)) 50px 0,
-radial-gradient(circle at 50% 59%, #D2CAAB 3%, #364E27 4%, #364E27 11%, rgba(54,78,39,0) 12%, rgba(54,78,39,0)) 0 50px,
-radial-gradient(circle at 50% 41%, #364E27 3%, #D2CAAB 4%, #D2CAAB 11%, rgba(210,202,171,0) 12%, rgba(210,202,171,0)) 0 50px,
-radial-gradient(circle at 100% 50%, #D2CAAB 16%, rgba(210,202,171,0) 17%),
-radial-gradient(circle at 0% 50%, #364E27 16%, rgba(54,78,39,0) 17%),
-radial-gradient(circle at 100% 50%, #D2CAAB 16%, rgba(210,202,171,0) 17%) 50px 50px,
-radial-gradient(circle at 0% 50%, #364E27 16%, rgba(54,78,39,0) 17%) 50px 50px;
-background-color:#63773F;
-background-size:100px 100px;
+.form {
+  background: radial-gradient(
+        circle farthest-side at 0% 50%,
+        #fb1 23.5%,
+        rgba(240, 166, 17, 0) 0
+      )
+      21px 30px,
+    radial-gradient(
+        circle farthest-side at 0% 50%,
+        #b71 24%,
+        rgba(240, 166, 17, 0) 0
+      )
+      19px 30px,
+    linear-gradient(
+        #fb1 14%,
+        rgba(240, 166, 17, 0) 0,
+        rgba(240, 166, 17, 0) 85%,
+        #fb1 0
+      )
+      0 0,
+    linear-gradient(
+        150deg,
+        #fb1 24%,
+        #b71 0,
+        #b71 26%,
+        rgba(240, 166, 17, 0) 0,
+        rgba(240, 166, 17, 0) 74%,
+        #b71 0,
+        #b71 76%,
+        #fb1 0
+      )
+      0 0,
+    linear-gradient(
+        30deg,
+        #fb1 24%,
+        #b71 0,
+        #b71 26%,
+        rgba(240, 166, 17, 0) 0,
+        rgba(240, 166, 17, 0) 74%,
+        #b71 0,
+        #b71 76%,
+        #fb1 0
+      )
+      0 0,
+    linear-gradient(90deg, #b71 2%, #fb1 0, #fb1 98%, #b71 0%) 0 0 #fb1;
+  background-size: 40px 60px;
+}
+
+p {
+  color: white;
 }
