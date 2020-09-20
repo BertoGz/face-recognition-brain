@@ -2,7 +2,7 @@ import React from "react";
 import Logo from "../Logo/Logo";
 import "./ImageLinkForm.css";
 import Rank from "../Rank/Rank";
-const ImageLinkForm = () => {
+const ImageLinkForm = ({ onInputChange, handleOnSubmit }) => {
   return (
     <div className="divv" style={{ display: "flex", flexDirection: "column" }}>
       <div
@@ -19,12 +19,17 @@ const ImageLinkForm = () => {
       <p className="f3" style={{ fontFamily: "monospace" }}>
         {"This Magic Brain will detect faces in your pictures, give it a shot"}
       </p>
-      <div className="center">
-        <div className="form center pa4 br3 shadow-5">
-          <input className="f4 pa2 w-70 center" type="text" />
+      <div style={{}}>
+        <div className="form center pa4 br3 shadow-1">
+          <input
+            className="f4 pa2 w-70 center"
+            type="text"
+            onChange={onInputChange}
+          />
           <button
-            className="w-30 grow f4 link ph3 pv2 dib white bg-light-purple"
+            className="w-3 0 grow f4 link ph3 pv2 dib white bg-light-purple"
             style={{ borderRadius: 10 }}
+            onClick={handleOnSubmit}
           >
             Detect
           </button>
