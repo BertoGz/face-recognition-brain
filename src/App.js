@@ -22,7 +22,7 @@ const particleOptions = {
 const App = () => {
   const [input, setInput] = useState("");
   const [imgUrl, setImgUrl] = useState("");
-  const [boxValues, setBoxValues] = useState({});
+  const [boxValues, setBoxValues] = useState(null);
 
   const onInputChange = (e) => {
     console.log(e.target.value);
@@ -37,9 +37,7 @@ const App = () => {
   };
 
   const calcFaceLocation = (data) => {
-    //console.log(
-    //  data.outputs[0].data.regions[0].region_info.bounding_box
-    //);
+    console.log(data.outputs[0].data.regions[0].region_info.bounding_box);
     let box = data.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById("aiImage");
     const width = Number(image.width);
@@ -84,7 +82,7 @@ const App = () => {
           justifyContent: "center",
         }}
       >
-        <FaceRecognition imgUrl={imgUrl} />
+        <FaceRecognition boxValues={boxValues} imgUrl={imgUrl} />
       </div>
     </div>
   );
