@@ -5,7 +5,8 @@ using react Js
 
 Project Summary:
 upload images and the app will detect if there is a face.
-uses an image recognition AI API -
+uses an image recognition AI API - clarifai
+allows users to sign in/create an account
 uses react-particles-js for the background
 
 ## `Installation`
