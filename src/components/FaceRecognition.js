@@ -1,15 +1,47 @@
 import React from "react";
 
-const FaceRecognition = ({ imgUrl }) => {
+const FaceRecognition = ({ boxValues, imgUrl }) => {
   return (
     <div
       style={{
-        maxWidth: "80%",
+        display: "flex",
+        justifyContent: "center",
+        alignContent: "center",
       }}
     >
-      <img id="aiImage" src={imgUrl} alt={""} />
+      <div className="absolute mt2" style={{ maxWidth: "40%" }}>
+        <img id="aiImage" src={imgUrl} alt={""} />
+        {boxValues && (
+          <div
+            style={{
+              top: boxValues.topRow,
+              right: boxValues.rightCol,
+              bottom: boxValues.bottomRow,
+              left: boxValues.leftCol,
+              position: "absolute",
+              boxShadow: "0px 0px 0px 3px red",
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              cursor: "pointer",
+            }}
+          >
+            <p> Face Detected</p>
+          </div>
+        )}
+      </div>
     </div>
   );
+};
+
+const styles = {
+  box: {
+    position: "absolute",
+    boxShadow: "3px",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    cursor: "pointer",
+  },
 };
 
 export default FaceRecognition;
