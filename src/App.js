@@ -1,23 +1,11 @@
 import React, { useState } from "react";
 import "./App.css";
-import Navigation from "./components/Navigation/Navigation";
-import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
-import FaceRecognition from "./components/FaceRecognition";
-import Particles from "react-particles-js";
+import Navigation from "./Components/navigation";
+import ImageLinkForm from "./Components/imageLinkForm";
+import FaceRecognition from "./Components/FaceRecognition";
+import Particles from "./Components/Particles";
 import { clarifai } from "./Utils/Requests";
 import { FACE_DETECT_MODEL } from "clarifai";
-
-const particleOptions = {
-  particles: {
-    number: {
-      value: 130,
-      density: {
-        enable: true,
-        value_area: 800,
-      },
-    },
-  },
-};
 
 const App = () => {
   const [input, setInput] = useState("");
@@ -49,20 +37,9 @@ const App = () => {
       bottomRow: height - box.bottom_row * height,
     });
   };
-
   return (
     <div className="App">
-      <Particles
-        style={{
-          position: "fixed",
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-          zIndex: -1,
-        }}
-        params={particleOptions}
-      />
+      <Particles />
       <Navigation />
       <div
         style={{
