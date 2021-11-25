@@ -1,22 +1,18 @@
 import React, { useState } from "react";
 import "./App.css";
+import { FACE_DETECT_MODEL } from "clarifai";
+import SigninForm from "./Components/SigninForm";
 import Navigation from "./Components/navigation";
 import ImageLinkForm from "./Components/imageLinkForm";
 import FaceRecognition from "./Components/FaceRecognition";
 import Particles from "./Components/Particles";
 import { clarifai } from "./Utils/Requests";
-import { FACE_DETECT_MODEL } from "clarifai";
 
 const App = () => {
-  const [input, setInput] = useState("");
   const [imgUrl, setImgUrl] = useState("");
   const [boxValues, setBoxValues] = useState(null);
 
-  const onInputChange = (e) => {
-    console.log(e.target.value);
-    setInput(e.target.value);
-  };
-  const handleOnSubmit = () => {
+  const handleOnSubmit = (input) => {
     setImgUrl(input);
     clarifai.models
       .predict(FACE_DETECT_MODEL, input)
@@ -41,26 +37,10 @@ const App = () => {
     <div className="App">
       <Particles />
       <Navigation />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-evenly",
-        }}
-      >
-        <ImageLinkForm
-          onInputChange={onInputChange}
-          handleOnSubmit={handleOnSubmit}
-        />
-      </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <FaceRecognition boxValues={boxValues} imgUrl={imgUrl} />
-      </div>
+      <SigninForm />
+      <ImageLinkForm handleOnSubmit={handleOnSubmit} />
+
+      <FaceRecognition boxValues={boxValues} imgUrl={imgUrl} />
     </div>
   );
 };
