@@ -1,9 +1,16 @@
 import React from "react";
 
-const Navigation = () => {
+const Navigation = ({ navigate, route }) => {
   return (
     <nav style={{ display: "flex", justifyContent: "flex-end" }}>
-      <p className="f4  link dim black underline pa3 pointer">Sign out</p>
+      {route !== "signin" && (
+        <p
+          onClick={() => navigate("signin")}
+          className="f4  link dim black underline pa3 pointer"
+        >
+          Sign out
+        </p>
+      )}
     </nav>
   );
 };
