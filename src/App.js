@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import { FACE_DETECT_MODEL } from "clarifai";
-import SigninForm from "./Components/SigninForm";
+import SigninRegisterForm from "./Components/SigninRegisterForm";
 import Navigation from "./Components/navigation";
 import ImageLinkForm from "./Components/imageLinkForm";
 import FaceRecognition from "./Components/FaceRecognition";
@@ -11,7 +11,7 @@ import { clarifai } from "./Utils/Requests";
 const App = () => {
   const [imgUrl, setImgUrl] = useState("");
   const [boxValues, setBoxValues] = useState(null);
-
+  const [route, setRoute] = useState("signin");
   const handleOnSubmit = (input) => {
     setImgUrl(input);
     clarifai.models
@@ -36,11 +36,15 @@ const App = () => {
   return (
     <div className="App">
       <Particles />
-      <Navigation />
-      <SigninForm />
-      <ImageLinkForm handleOnSubmit={handleOnSubmit} />
-
-      <FaceRecognition boxValues={boxValues} imgUrl={imgUrl} />
+      <Navigation navigate={setRoute} {...{ route }} />
+      {route === "signin" ? (
+        <SigninRegisterForm navigate={setRoute} {...{ route }} />
+      ) : (
+        <>
+          <ImageLinkForm handleOnSubmit={handleOnSubmit} />
+          <FaceRecognition boxValues={boxValues} imgUrl={imgUrl} />
+        </>
+      )}
     </div>
   );
 };
