@@ -7,16 +7,27 @@ import ImageLinkForm from "./Components/imageLinkForm";
 import FaceRecognition from "./Components/FaceRecognition";
 import Particles from "./Components/Particles";
 import { clarifai } from "./Utils/Requests";
+import { increaseEntry } from "./Requests";
 
 const App = () => {
   const [imgUrl, setImgUrl] = useState("");
   const [boxValues, setBoxValues] = useState(null);
+  const [user, setUser] = useState(null);
   const [route, setRoute] = useState("signin");
-  const handleOnSubmit = (input) => {
+  const handleOnSubmit = async (input) => {
     setImgUrl(input);
     clarifai.models
       .predict(FACE_DETECT_MODEL, input)
-      .then((response) => calcFaceLocation(response))
+      .then(async (response) => {
+        if (response) {
+          const res = await increaseEntry({ id: user?.id });
+          if (res.status > 0) {
+            setUser({ ...user, entries: res.data });
+            console.log("helo!");
+          }
+        }
+        calcFaceLocation(response);
+      })
       .catch((error) => console.log(error));
   };
 
@@ -33,15 +44,27 @@ const App = () => {
       bottomRow: height - box.bottom_row * height,
     });
   };
+
+  const clearStates = () => {
+    setUser(null);
+    setRoute("signin");
+    setImgUrl(null);
+    setBoxValues(null);
+  };
   return (
     <div className="App">
-      <Particles />
-      <Navigation navigate={setRoute} {...{ route }} />
+      <Navigation
+        navigate={setRoute}
+        {...{ route }}
+        onSignOut={() => {
+          clearStates();
+        }}
+      />
       {route === "signin" ? (
-        <SigninRegisterForm navigate={setRoute} {...{ route }} />
+        <SigninRegisterForm navigate={setRoute} {...{ route, setUser }} />
       ) : (
         <>
-          <ImageLinkForm handleOnSubmit={handleOnSubmit} />
+          <ImageLinkForm user={user} handleOnSubmit={handleOnSubmit} />
           <FaceRecognition boxValues={boxValues} imgUrl={imgUrl} />
         </>
       )}
