@@ -1,11 +1,11 @@
 import React from "react";
 
-const Navigation = ({ navigate, route }) => {
+const Navigation = ({ route, onSignOut }) => {
   return (
     <nav style={{ display: "flex", justifyContent: "flex-end" }}>
       {route !== "signin" && (
         <p
-          onClick={() => navigate("signin")}
+          onClick={onSignOut}
           className="f4  link dim black underline pa3 pointer"
         >
           Sign out
