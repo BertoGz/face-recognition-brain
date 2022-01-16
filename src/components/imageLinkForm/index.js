@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Logo from "../Logo";
 import "./ImageLinkForm.css";
 import Rank from "../Rank/Rank";
-const ImageLinkForm = ({ handleOnSubmit }) => {
+const ImageLinkForm = ({ user, handleOnSubmit }) => {
   const [input, setInput] = useState("");
   const onInputChange = (e) => {
     console.log(e.target.value);
@@ -29,7 +29,7 @@ const ImageLinkForm = ({ handleOnSubmit }) => {
           }}
         >
           <Logo />
-          <Rank />
+          <Rank {...{ user }} />
         </div>
         <p className="f3" style={{ fontFamily: "monospace" }}>
           {
