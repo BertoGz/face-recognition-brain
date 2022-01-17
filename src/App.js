@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import "./App.css";
-import { FACE_DETECT_MODEL } from "clarifai";
 import SigninRegisterForm from "./Components/SigninRegisterForm";
 import Navigation from "./Components/navigation";
 import ImageLinkForm from "./Components/imageLinkForm";
 import FaceRecognition from "./Components/FaceRecognition";
 import Particles from "./Components/Particles";
-import { clarifai } from "./Utils/Requests";
-import { increaseEntry } from "./Requests";
+import { increaseEntry, clarifai } from "./Requests";
 
 const App = () => {
   const [imgUrl, setImgUrl] = useState("");
@@ -16,17 +14,17 @@ const App = () => {
   const [route, setRoute] = useState("signin");
   const handleOnSubmit = async (input) => {
     setImgUrl(input);
-    clarifai.models
-      .predict(FACE_DETECT_MODEL, input)
+    clarifai({ url: input })
       .then(async (response) => {
-        if (response) {
+        if (response.data) {
           const res = await increaseEntry({ id: user?.id });
           if (res.status > 0) {
             setUser({ ...user, entries: res.data });
             console.log("helo!");
           }
         }
-        calcFaceLocation(response);
+
+        calcFaceLocation(response.data);
       })
       .catch((error) => console.log(error));
   };
