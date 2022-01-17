@@ -1,4 +1,5 @@
 import {
+  CLARIFAI,
   BASE_URL,
   GET_USERS_ENDPOINT,
   INCREASE_ENTRY,
@@ -65,5 +66,13 @@ export const increaseEntry = ({ id }) =>
     method: "put",
     body: {
       id,
+    },
+  });
+export const clarifai = ({ url }) =>
+  postRequest({
+    endpoint: CLARIFAI,
+    method: "post",
+    body: {
+      url,
     },
   });
