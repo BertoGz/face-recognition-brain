@@ -52,7 +52,7 @@ const App = () => {
   };
   return (
     <div className="App">
-      <Particles />
+      {false && <Particles />}
       <Navigation
         navigate={setRoute}
         {...{ route }}
