@@ -50,9 +50,16 @@ const SigninRegisterForm = ({ props, navigate, setUser }) => {
         navigate("home");
         setUser(response.data);
       } else {
+        setCredentialsError(response.message);
         console.log("error at onSubmitRegister", response);
       }
     }
+  };
+
+  const clearErrors = () => {
+    setEmailError("");
+    setPasswordError("");
+    setCredentialsError("");
   };
 
   return (
@@ -160,7 +167,10 @@ const SigninRegisterForm = ({ props, navigate, setUser }) => {
                   <div className="lh-copy mt3">
                     <input
                       style={{ backgroundColor: "rgb(100,100,100,.5)" }}
-                      onClick={() => setIsRegistering(true)}
+                      onClick={() => {
+                        setIsRegistering(true);
+                        clearErrors();
+                      }}
                       className="b ph3 pv2 input-reset ba white-80 b--white  bg-green grow pointer f6 dib"
                       value="Sign-up"
                     />
@@ -181,7 +191,10 @@ const SigninRegisterForm = ({ props, navigate, setUser }) => {
                   <div className="lh-copy mt3">
                     <input
                       style={{ backgroundColor: "rgb(100,100,0,.5)" }}
-                      onClick={() => setIsRegistering(false)}
+                      onClick={() => {
+                        setIsRegistering(false);
+                        clearErrors();
+                      }}
                       className="b ph3 pv2 input-reset ba white-80 b--white  bg-green grow pointer f6 dib"
                       value="Already a user? Sign-in"
                     />
