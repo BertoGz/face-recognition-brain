@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Logo from "../Logo";
 import "./ImageLinkForm.css";
-import Rank from "../Rank/Rank";
+import Rank from "../Rank";
 const ImageLinkForm = ({ user, handleOnSubmit }) => {
   const [input, setInput] = useState("");
   const onInputChange = (e) => {
