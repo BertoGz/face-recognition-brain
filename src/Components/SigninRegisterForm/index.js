@@ -9,7 +9,7 @@ const SigninRegisterForm = ({ props, navigate, setUser }) => {
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [emailError, setEmailError] = useState("");
-
+  const [credentialsError, setCredentialsError] = useState("");
   const goodPassword = password?.length >= 8;
   const goodEmail = email?.length > 0;
 
@@ -18,6 +18,8 @@ const SigninRegisterForm = ({ props, navigate, setUser }) => {
     if (response.status > 0) {
       setUser(response.data);
       navigate("home");
+    } else {
+      setCredentialsError("credentials not recognized");
     }
   };
   const onSubmitRegister = async () => {
@@ -111,6 +113,7 @@ const SigninRegisterForm = ({ props, navigate, setUser }) => {
                   </label>
                 )}
               </div>
+
               <div className="mv3">
                 <label
                   className="db fw6 lh-copy f6 white-80"
@@ -132,6 +135,14 @@ const SigninRegisterForm = ({ props, navigate, setUser }) => {
                     htmlFor="password"
                   >
                     {passwordError}
+                  </label>
+                )}
+                {!!credentialsError && (
+                  <label
+                    className="db fw6 lh-copy f6 white-80 red"
+                    htmlFor="password"
+                  >
+                    {credentialsError}
                   </label>
                 )}
               </div>
