@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import SigninRegisterForm from "./Components/SigninRegisterForm";
 import Navigation from "./Components/Navigation";
-import ImageLinkForm from "./Components/imageLinkForm";
+import ImageLinkForm from "./Components/ImageLinkForm";
 import FaceRecognition from "./Components/FaceRecognition";
 import Particles from "./Components/Particles";
 import { increaseEntry, clarifai } from "./Requests";
