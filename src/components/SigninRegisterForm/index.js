@@ -45,6 +45,7 @@ const SigninRegisterForm = ({ props, navigate, setUser }) => {
       });
       if (response.status > 0) {
         navigate("home");
+        setUser(response.data);
       } else {
         console.log("error at onSubmitRegister", response);
       }
@@ -53,7 +54,7 @@ const SigninRegisterForm = ({ props, navigate, setUser }) => {
 
   return (
     <>
-      <article className="br3 ba dark-gray b--black-10 mv4 w-100 w-50-m shadow-5 w-25-l mw6 center blur">
+      <article className="br3 ba dark-gray b--black-10 mv4 w-100 w-50-m shadow-5 w-25-l mw6 center blur(10px)">
         <main className=" black-80">
           <h4
             style={{
