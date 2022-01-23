@@ -30,8 +30,8 @@ const ParticlesComponent = () => {
               quantity: 4,
             },
             repulse: {
-              distance: 100,
-              duration: 0.4,
+              distance: 50,
+              duration: 10,
             },
           },
         },
@@ -54,13 +54,13 @@ const ParticlesComponent = () => {
             enable: true,
             outMode: "bounce",
             random: false,
-            speed: 2,
+            speed: 1,
             straight: false,
           },
           number: {
             density: {
               enable: true,
-              value_area: 800,
+              area: 800,
             },
             value: 80,
           },
