@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { requestUserSignin, requestUserRegister } from "../../Requests";
 
+// test log
 const SigninRegisterForm = ({ props, navigate, setUser }) => {
   const [isRegistering, setIsRegistering] = useState(false);
   const [name, setName] = useState("");
