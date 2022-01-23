@@ -12,6 +12,7 @@ const App = () => {
   const [boxValues, setBoxValues] = useState(null);
   const [user, setUser] = useState(null);
   const [route, setRoute] = useState("signin");
+
   const handleOnSubmit = async (input) => {
     setImgUrl(input);
     clarifai({ url: input })
@@ -51,6 +52,7 @@ const App = () => {
   };
   return (
     <div className="App">
+      <Particles />
       <Navigation
         navigate={setRoute}
         {...{ route }}
