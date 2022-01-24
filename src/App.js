@@ -31,7 +31,7 @@ const App = () => {
 
   return (
     <div className="App">
-      {false && <Particles />}
+      {true && <Particles />}
       <NavigationBar
         {...{ navigation }}
         onSignOut={() => {
