@@ -1,9 +1,9 @@
 import React from "react";
 
-const Navigation = ({ route, onSignOut }) => {
+const NavigationBar = ({ navigation, onSignOut }) => {
   return (
     <nav style={{ display: "flex", justifyContent: "flex-end" }}>
-      {route !== "signin" && (
+      {navigation.current !== "signin" && (
         <p
           onClick={onSignOut}
           className="f4  link dim black underline pa3 pointer"
@@ -15,4 +15,4 @@ const Navigation = ({ route, onSignOut }) => {
   );
 };
 
-export default Navigation;
+export default NavigationBar;
