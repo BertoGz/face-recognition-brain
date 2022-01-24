@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { requestUserSignin, requestUserRegister } from "../../Requests";
 
 // test log
-const SigninRegisterForm = ({ props, navigate, setUser }) => {
+const SigninRegisterForm = ({ props }) => {
+  const { navigation, user } = props || {};
   const [isRegistering, setIsRegistering] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -16,8 +17,8 @@ const SigninRegisterForm = ({ props, navigate, setUser }) => {
   const onSubmitSignin = async () => {
     const response = await requestUserSignin({ email, password });
     if (response.status > 0) {
-      setUser(response.data);
-      navigate("home");
+      user.setState(response.data);
+      navigation.setState("home");
     } else {
       setCredentialsError("credentials not recognized");
     }
@@ -47,8 +48,8 @@ const SigninRegisterForm = ({ props, navigate, setUser }) => {
         name,
       });
       if (response.status > 0) {
-        navigate("home");
-        setUser(response.data);
+        navigation.setState("home");
+        user.setState(response.data);
       } else {
         setCredentialsError(response.message);
         console.log("error at onSubmitRegister", response);
