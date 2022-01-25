@@ -14,10 +14,19 @@ const Home = (props) => {
     clarifai({ url: input })
       .then(async (response) => {
         if (response.data) {
-          const res = await increaseEntry({ id: user.current?.id });
-          if (res.status > 0) {
-            user.setState({ ...user.current, entries: res.data });
-            console.log("helo!");
+          if (user?.current?.id) {
+            // go here if user is real
+            const res = await increaseEntry({ id: user.current?.id });
+            if (res.status > 0) {
+              user.setState({ ...user.current, entries: res.data });
+              console.log("helo!");
+            }
+          } else {
+            // go here if user is guest
+            user.setState({
+              ...user.current,
+              entries: user?.current?.entries + 1,
+            });
           }
         }
 
