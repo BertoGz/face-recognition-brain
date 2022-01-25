@@ -9,6 +9,7 @@ import {
   Button,
   Pressable,
 } from "native-base";
+import { stringRemoveSpaces } from "../../Helpers";
 // test log
 const buttonStyles = {
   mt: "10px",
@@ -16,6 +17,7 @@ const buttonStyles = {
 const inputStyles = {
   size: "xl",
   color: "white",
+  bgColor: "transparent",
 };
 const noEmailError = "Please enter a email";
 const invalidEmailError = "Please enter a valid email";
@@ -45,7 +47,8 @@ const SigninRegisterForm = ({ props }) => {
     if (!email || !password) {
       return 0;
     }
-    const response = await requestUserSignin({ email, password });
+    const formatEmail = stringRemoveSpaces(email.toLowerCase());
+    const response = await requestUserSignin({ email: formatEmail, password });
     if (response.status > 0) {
       user.setState(response.data);
       navigation.setState("home");
@@ -72,8 +75,9 @@ const SigninRegisterForm = ({ props }) => {
     }
 
     if (goodPassword && goodEmail) {
+      const formatEmail = stringRemoveSpaces(email.toLowerCase());
       const response = await requestUserRegister({
-        email,
+        email: formatEmail,
         password,
         name,
       });
