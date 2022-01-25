@@ -1,7 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { requestUserSignin, requestUserRegister } from "../../Requests";
-
+import {
+  Center,
+  Box,
+  Heading,
+  Input,
+  Text,
+  Button,
+  Pressable,
+} from "native-base";
 // test log
+const buttonStyles = {
+  mt: "10px",
+};
+const noEmailError = "Please enter a email";
+const invalidEmailError = "Please enter a valid email";
+const noPasswordError = "Please enter a password";
+const invalidPasswordError = "Enter a password at least 8 characters long";
+const credentialNotRecognizedError = "credentials not recognized";
+
 const SigninRegisterForm = ({ props }) => {
   const { navigation, user } = props || {};
   const [isRegistering, setIsRegistering] = useState(false);
@@ -15,12 +32,21 @@ const SigninRegisterForm = ({ props }) => {
   const goodEmail = email?.length > 0;
 
   const onSubmitSignin = async () => {
+    if (!email) {
+      setEmailError(noEmailError);
+    }
+    if (!password) {
+      setPasswordError(noPasswordError);
+    }
+    if (!email || !password) {
+      return 0;
+    }
     const response = await requestUserSignin({ email, password });
     if (response.status > 0) {
       user.setState(response.data);
       navigation.setState("home");
     } else {
-      setCredentialsError("credentials not recognized");
+      setCredentialsError(credentialNotRecognizedError);
     }
   };
   const onSubmitRegister = async () => {
@@ -28,15 +54,15 @@ const SigninRegisterForm = ({ props }) => {
     setEmailError("");
     if (!goodPassword || !goodEmail) {
       if (password?.length === 0) {
-        setPasswordError("Please enter a password");
+        setPasswordError(noPasswordError);
       } else if (!goodPassword) {
-        setPasswordError("Enter a password at least 8 characters long");
+        setPasswordError(invalidPasswordError);
       }
 
       if (email?.length === 0) {
-        setEmailError("Please enter a email");
+        setEmailError(noEmailError);
       } else if (!goodEmail) {
-        setEmailError("Enter a valid email");
+        setEmailError(invalidEmailError);
       }
       return 0;
     }
@@ -64,149 +90,102 @@ const SigninRegisterForm = ({ props }) => {
   };
 
   return (
-    <>
-      <article className="br3 ba dark-gray b--black-10 mv4 w-100 w-50-m shadow-5 w-25-l mw6 center blur(10px)">
-        <main className=" black-80">
-          <h4
-            style={{
-              color: "white",
-              fontSize: 28,
+    <Center pt="20px">
+      <Box shadow="6" p="10" bgColor={"rgba(0,0,0,.1)"}>
+        <Heading color="white"> Face Recognition Brain</Heading>
+
+        <Box maxW="400px" pt="3">
+          {isRegistering && (
+            <>
+              <Text color="white">Full Name</Text>
+              <Input
+                type="text"
+                placeholder="fullname"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </>
+          )}
+          <Text alignSelf={"flex-start"} color="white">
+            Email
+          </Text>
+          <Input
+            type="email"
+            placeholder="email-address"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
             }}
-          >
-            Face Recognition Brain
-          </h4>
-          <form className="measure">
-            <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-              {isRegistering && (
-                <div className="mt3">
-                  <label
-                    className="db fw6 lh-copy f6 white-80 "
-                    htmlFor="fullname"
-                  >
-                    Full Name
-                  </label>
-                  <input
-                    className="pa2 input-reset ba bg-transparent white hover-white w-100"
-                    type="text"
-                    name="fullname"
-                    id="fullname"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </div>
-              )}
-              <div className="mt3">
-                <label
-                  className="db fw6 lh-copy f6 white-80 "
-                  htmlFor="email-address"
-                >
-                  Email
-                </label>
-                <input
-                  className="pa2 input-reset ba bg-transparent white hover-white w-100 "
-                  type="email"
-                  name="email-address"
-                  id="email-address"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
-                />
-                {!!emailError && (
-                  <label
-                    className="db fw6 lh-copy f6 white-80 red "
-                    htmlFor="email-address"
-                  >
-                    {emailError}
-                  </label>
-                )}
-              </div>
+          />
+          {!!emailError && <Text style={{ color: "red" }}>{emailError}</Text>}
+          <Text alignSelf={"flex-start"} color="white">
+            Password
+          </Text>
+          <Input
+            type="password"
+            placeholder="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          {!!passwordError && (
+            <Text style={{ color: "red" }}>{passwordError}</Text>
+          )}
+          {!!credentialsError && (
+            <Text style={{ color: "red" }}>{credentialsError}</Text>
+          )}
+        </Box>
 
-              <div className="mv3">
-                <label
-                  className="db fw6 lh-copy f6 white-80"
-                  htmlFor="password"
-                >
-                  Password
-                </label>
-                <input
-                  className="b pa2 input-reset ba bg-transparent white hover-white w-100"
-                  type="password"
-                  name="password"
-                  id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                {!!passwordError && (
-                  <label
-                    className="db fw6 lh-copy f6 white-80 red"
-                    htmlFor="password"
-                  >
-                    {passwordError}
-                  </label>
-                )}
-                {!!credentialsError && (
-                  <label
-                    className="db fw6 lh-copy f6 white-80 red"
-                    htmlFor="password"
-                  >
-                    {credentialsError}
-                  </label>
-                )}
-              </div>
+        {!isRegistering && (
+          <Box maxW="400px">
+            <Button
+              {...buttonStyles}
+              style={{ backgroundColor: "teal" }}
+              onPress={onSubmitSignin}
+            >
+              Sign in
+            </Button>
 
-              {!isRegistering && (
-                <div>
-                  <div className="mt3">
-                    <input
-                      style={{ backgroundColor: "rgb(0,100,100,.5)" }}
-                      className="b ph3 pv2 input-reset ba white-80 b--white grow pointer f6 dib"
-                      value="Sign in"
-                      onClick={onSubmitSignin}
-                    />
-                  </div>
-                  <div className="lh-copy mt3">
-                    <input
-                      style={{ backgroundColor: "rgb(100,100,100,.5)" }}
-                      onClick={() => {
-                        setIsRegistering(true);
-                        clearErrors();
-                      }}
-                      className="b ph3 pv2 input-reset ba white-80 b--white  bg-green grow pointer f6 dib"
-                      value="Sign-up"
-                    />
-                  </div>
-                </div>
-              )}
-              {isRegistering && (
-                <div>
-                  <div className="lh-copy mt3">
-                    <input
-                      style={{ backgroundColor: "rgb(0,100,100,.5)" }}
-                      onClick={onSubmitRegister}
-                      className="b ph3 pv2 input-reset ba white-80 b--white  bg-green grow pointer f6 dib"
-                      value="Sign-up"
-                    />
-                  </div>
+            <Button
+              {...buttonStyles}
+              style={{ backgroundColor: "rgb(150,120,50)" }}
+              onPress={() => {
+                setIsRegistering(true);
+                clearErrors();
+              }}
+            >
+              Sign-up
+            </Button>
+          </Box>
+        )}
+        {isRegistering && (
+          <Box maxW="400px">
+            <Button
+              {...buttonStyles}
+              style={{ backgroundColor: "teal" }}
+              onPress={onSubmitRegister}
+            >
+              Sign-up
+            </Button>
 
-                  <div className="lh-copy mt3">
-                    <input
-                      style={{ backgroundColor: "rgb(100,100,0,.5)" }}
-                      onClick={() => {
-                        setIsRegistering(false);
-                        clearErrors();
-                      }}
-                      className="b ph3 pv2 input-reset ba white-80 b--white  bg-green grow pointer f6 dib"
-                      value="Already a user? Sign-in"
-                    />
-                  </div>
-                </div>
-              )}
-            </fieldset>
-          </form>
-        </main>
-      </article>
-    </>
+            <Button
+              {...buttonStyles}
+              style={{ backgroundColor: "rgb(150,120,50)" }}
+              onPress={() => {
+                setIsRegistering(false);
+                clearErrors();
+              }}
+            >
+              Already a user? Sign-in
+            </Button>
+          </Box>
+        )}
+        <Pressable>
+          <Text color="white" fontWeight={"bold"} pt="4">
+            Continue without registering
+          </Text>
+        </Pressable>
+      </Box>
+    </Center>
   );
 };
 export default SigninRegisterForm;
