@@ -30,16 +30,22 @@ const App = () => {
   };
 
   return (
-    <div className="App">
-      {true && <Particles />}
-      <NavigationBar
-        {...{ navigation }}
-        onSignOut={() => {
-          clearStates();
-        }}
+    <>
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
       />
-      {NavigationRoutes()}
-    </div>
+      <div className="App">
+        {true && <Particles />}
+        <NavigationBar
+          {...{ navigation }}
+          onSignOut={() => {
+            clearStates();
+          }}
+        />
+        {NavigationRoutes()}
+      </div>
+    </>
   );
 };
 
