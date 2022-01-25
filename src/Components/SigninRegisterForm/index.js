@@ -25,6 +25,10 @@ const noPasswordError = "Please enter a password";
 const invalidPasswordError = "Enter a password at least 8 characters long";
 const credentialNotRecognizedError = "credentials not recognized";
 
+const guestUser = {
+  name: "Guest",
+  entries: 0,
+};
 const SigninRegisterForm = ({ props }) => {
   const { navigation, user } = props || {};
   const [isRegistering, setIsRegistering] = useState(false);
@@ -36,7 +40,10 @@ const SigninRegisterForm = ({ props }) => {
   const [credentialsError, setCredentialsError] = useState("");
   const goodPassword = password?.length >= 8;
   const goodEmail = email?.length > 0;
-
+  const onPressContinueAsGuest = () => {
+    user.setState(guestUser);
+    navigation.setState("home");
+  };
   const onSubmitSignin = async () => {
     if (!email) {
       setEmailError(noEmailError);
@@ -190,7 +197,7 @@ const SigninRegisterForm = ({ props }) => {
             </Button>
           </Box>
         )}
-        <Pressable>
+        <Pressable onPress={onPressContinueAsGuest}>
           <Text color="white" fontWeight={"bold"} pt="4">
             Continue without registering
           </Text>
