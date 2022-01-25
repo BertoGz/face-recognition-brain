@@ -13,6 +13,10 @@ import {
 const buttonStyles = {
   mt: "10px",
 };
+const inputStyles = {
+  size: "xl",
+  color: "white",
+};
 const noEmailError = "Please enter a email";
 const invalidEmailError = "Please enter a valid email";
 const noPasswordError = "Please enter a password";
@@ -99,6 +103,7 @@ const SigninRegisterForm = ({ props }) => {
             <>
               <Text color="white">Full Name</Text>
               <Input
+                {...inputStyles}
                 type="text"
                 placeholder="fullname"
                 value={name}
@@ -110,6 +115,7 @@ const SigninRegisterForm = ({ props }) => {
             Email
           </Text>
           <Input
+            {...inputStyles}
             type="email"
             placeholder="email-address"
             value={email}
@@ -122,6 +128,7 @@ const SigninRegisterForm = ({ props }) => {
             Password
           </Text>
           <Input
+            {...inputStyles}
             type="password"
             placeholder="password"
             value={password}
