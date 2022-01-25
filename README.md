@@ -7,7 +7,7 @@ using react Js
 This is the repo for the Front-end.
 It was created using ReactJs and NativeBase.
 I hope this project can demonstrate my understanding of
-React and its patterns/fundamentals like hooks and state + project organization and skillset with javascript,
+React, its patterns and fundamentals + hooks, state, project organization and skillset with javascript,
 It has a login form where a user can register/sign-up
 and a second route where the user can begin using the image recognition api.
 
