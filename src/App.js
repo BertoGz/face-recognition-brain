@@ -38,7 +38,7 @@ const App = () => {
       <div className="App">
         {true && <Particles />}
         <NavigationBar
-          {...{ navigation }}
+          {...{ navigation, user }}
           onSignOut={() => {
             clearStates();
           }}
