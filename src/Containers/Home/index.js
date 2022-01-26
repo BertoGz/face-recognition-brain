@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import FaceRecognition from "../../Components/FaceRecognition";
 import ImageLinkForm from "../../Components/ImageLinkForm";
 import { clarifai, increaseEntry } from "../../Requests";
