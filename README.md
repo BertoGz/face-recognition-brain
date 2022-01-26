@@ -1,13 +1,15 @@
 This project was developed as part of zero-to-mastery's fullstack developer course
+link to demo: https://smart-brain-bertogz.herokuapp.com/
 using react Js
 
 ## Face Recognition Brain
 
-Project Summary:
-upload images and the app will detect if there is a face.
-uses an image recognition AI API - clarifai
-allows users to sign in/create an account
-uses react-particles-js for the background
+This is the repo for the Front-end.
+It was created using ReactJs and NativeBase.
+I hope this project can demonstrate my understanding of
+React, its patterns and fundamentals + hooks, state, project organization and skillset with javascript,
+It has a login form where a user can register/sign-up
+and a second route where the user can begin using the image recognition api.
 
 ## `Installation`
 
