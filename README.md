@@ -13,4 +13,4 @@ and a second route where the user can begin using the image recognition api.
 
 ## `Installation`
 
-simply pull repo, cd to directory, run yarn. run yarn start
+simply clone repo, cd to directory, run yarn. run yarn start
