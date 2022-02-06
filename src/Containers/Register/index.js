@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { requestUserSignin, requestUserRegister } from "../../Requests";
 import {
   Center,
@@ -10,9 +10,9 @@ import {
   Pressable,
 } from "native-base";
 import { stringRemoveSpaces } from "../../Helpers";
-import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { initUserData } from "../../Redux/Actions/user";
+import { setNavigationRoute } from "../../Redux/Actions/navigation";
 // test log
 const buttonStyles = {
   mt: "10px",
@@ -32,8 +32,7 @@ const guestUser = {
   name: "Guest",
   entries: 0,
 };
-const Register = (props) => {
-  const { navigation } = props || {};
+const Register = () => {
   const dispatch = useDispatch();
   const [isRegistering, setIsRegistering] = useState(false);
   const [name, setName] = useState("");
@@ -46,7 +45,7 @@ const Register = (props) => {
   const goodEmail = email?.length > 0;
   const onPressContinueAsGuest = () => {
     dispatch(initUserData(guestUser));
-    navigation.setState("home");
+    dispatch(setNavigationRoute("home"));
   };
   const onSubmitSignin = async () => {
     if (!email) {
@@ -63,7 +62,7 @@ const Register = (props) => {
     const { status, data } = response || {};
     if (status > 0) {
       dispatch(initUserData(data));
-      navigation.setState("home");
+      dispatch(setNavigationRoute("home"));
     } else {
       setCredentialsError(credentialNotRecognizedError);
     }
@@ -95,7 +94,7 @@ const Register = (props) => {
       });
       const { status, data } = response || {};
       if (status > 0) {
-        navigation.setState("home");
+        dispatch(setNavigationRoute("home"));
         dispatch(initUserData(data));
       } else {
         setCredentialsError(response.message);
