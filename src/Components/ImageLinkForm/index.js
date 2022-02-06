@@ -17,7 +17,6 @@ const inputStyles = {
 const ImageLinkForm = ({ user, handleOnSubmit }) => {
   const [input, setInput] = useState("");
   const onInputChange = (e) => {
-    console.log(e.target.value);
     setInput(e.target.value);
   };
   return (
