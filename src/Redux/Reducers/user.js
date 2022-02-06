@@ -1,4 +1,8 @@
-import { INIT_USER_DATA, SET_USER_ENTRIES } from "../Actions/user";
+import {
+  INIT_USER_DATA,
+  SET_USER_ENTRIES,
+  RESET_USER_STATE,
+} from "../Actions/user";
 
 const initialState = {
   name: "Guest",
@@ -10,8 +14,12 @@ export const user = (state = initialState, event) => {
 
   switch (type) {
     case INIT_USER_DATA:
-      return { state: payload };
+      return { ...payload };
     case SET_USER_ENTRIES:
       return { ...state, entries: payload };
+    case RESET_USER_STATE:
+      return initialState;
+    default:
+      return state;
   }
 };
