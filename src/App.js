@@ -1,33 +1,28 @@
-import React, { useState } from "react";
+import React, { useMemo } from "react";
 import "./App.css";
 import NavigationBar from "./Components/NavigationBar";
 import Particles from "./Components/Particles";
 import Register from "./Containers/Register";
 import Home from "./Containers/Home";
+import { resetUserState } from "./Redux/Actions/user";
+import { useDispatch, useSelector } from "react-redux";
+import { resetNavigationState } from "./Redux/Actions/navigation";
 const App = () => {
-  const [userState, setUserState] = useState(null);
-  const [navigationState, setNavigationState] = useState("signin");
-  const navigation = {
-    current: navigationState,
-    setState: (routeName) => setNavigationState(routeName),
-  };
-  const user = {
-    current: userState,
-    setState: (state) => setUserState(state),
-  };
+  const dispatch = useDispatch();
+  const { route } = useSelector((state) => state.navigation);
 
   const clearStates = () => {
-    user.setState(null);
-    navigation.setState("signin");
+    dispatch(resetUserState());
+    dispatch(resetNavigationState());
   };
-  const NavigationRoutes = () => {
-    switch (navigation.current) {
+  const NavigationRoutes = useMemo(() => {
+    switch (route) {
       case "signin":
-        return <Register {...{ navigation, user }} />;
+        return <Register />;
       case "home":
-        return <Home {...{ user }} />;
+        return <Home />;
     }
-  };
+  }, [route]);
 
   return (
     <>
@@ -36,14 +31,14 @@ const App = () => {
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
       />
       <div className="App">
-        {true && <Particles />}
+        <Particles />
         <NavigationBar
-          {...{ navigation, user }}
+          {...{ route }}
           onSignOut={() => {
             clearStates();
           }}
         />
-        {NavigationRoutes()}
+        {NavigationRoutes}
       </div>
     </>
   );
