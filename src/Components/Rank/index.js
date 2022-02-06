@@ -1,6 +1,6 @@
 import React from "react";
 const Rank = ({ user }) => {
-  const { name, entries } = user.current || {};
+  const { name, entries } = user || {};
   return (
     <div
       style={{
