@@ -7,7 +7,7 @@ import {
 } from "./Constants";
 const sendRequest = async ({ endpoint, method, body }) => {
   const url = `${BASE_URL}${endpoint}`;
-  console.log("url", url, endpoint);
+  //console.log("url", url, endpoint);
   const res = fetch(url, {
     method,
     headers: { "Content-Type": "application/json" },
@@ -29,7 +29,7 @@ const postRequest = async ({ endpoint, method, body }) => {
 */
     const res = response || {};
 
-    console.log("data", res);
+    // console.log("data", res);
     const { status } = res || {};
     if (status > 0) {
       return res;
