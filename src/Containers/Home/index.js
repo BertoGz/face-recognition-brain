@@ -7,13 +7,15 @@ import { clarifai, increaseEntry } from "../../Requests";
 
 const Home = () => {
   const { user } = useSelector((state) => state);
-
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const [imgUrl, setImgUrl] = useState("");
   const [boxValues, setBoxValues] = useState(null);
 
   const handleOnSubmit = async (input) => {
     setImgUrl(input);
+    setLoading(true);
+
     clarifai({ url: input })
       .then(async (response) => {
         if (response.data) {
@@ -30,8 +32,12 @@ const Home = () => {
         }
 
         calcFaceLocation(response.data);
+        setLoading(false);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
   };
 
   const calcFaceLocation = (data) => {
@@ -50,7 +56,7 @@ const Home = () => {
 
   return (
     <>
-      <ImageLinkForm {...{ user }} handleOnSubmit={handleOnSubmit} />
+      <ImageLinkForm {...{ user, loading }} handleOnSubmit={handleOnSubmit} />
       <FaceRecognition boxValues={boxValues} imgUrl={imgUrl} />
     </>
   );
