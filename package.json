@@ -12,14 +12,17 @@
     "react-native-safe-area-context": "^3.3.2",
     "react-native-svg": "^12.1.1",
     "react-native-web": "^0.17.5",
+    "react-redux": "^7.2.6",
     "react-scripts": "3.4.3",
     "react-tilt": "^0.1.4",
     "react-tsparticles": "1.39.0",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.1",
     "serve": "^13.0.2",
     "tachyons": "^4.12.0"
   },
   "scripts": {
-    "start": "serve -s build",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -38,5 +41,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "redux-logger": "^3.0.6"
   }
 }
