@@ -14,7 +14,7 @@ const inputStyles = {
   size: "xl",
 };
 
-const ImageLinkForm = ({ user, handleOnSubmit }) => {
+const ImageLinkForm = ({ user, loading, handleOnSubmit }) => {
   const [input, setInput] = useState("");
   const onInputChange = (e) => {
     setInput(e.target.value);
@@ -31,7 +31,11 @@ const ImageLinkForm = ({ user, handleOnSubmit }) => {
       </Heading>
       <HStack px="10%">
         <Input {...inputStyles} onChange={onInputChange} />
-        <Button size="lg" onPress={() => handleOnSubmit(input)}>
+        <Button
+          size="lg"
+          onPress={() => handleOnSubmit(input)}
+          isLoading={loading}
+        >
           Detect image
         </Button>
       </HStack>
