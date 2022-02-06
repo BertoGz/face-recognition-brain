@@ -41,6 +41,7 @@ const Register = () => {
   const [passwordError, setPasswordError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [credentialsError, setCredentialsError] = useState("");
+  const [loading, setLoading] = useState(false);
   const goodPassword = password?.length >= 8;
   const goodEmail = email?.length > 0;
   const onPressContinueAsGuest = () => {
@@ -58,7 +59,9 @@ const Register = () => {
       return 0;
     }
     const formatEmail = stringRemoveSpaces(email.toLowerCase());
+    setLoading(true);
     const response = await requestUserSignin({ email: formatEmail, password });
+    setLoading(false);
     const { status, data } = response || {};
     if (status > 0) {
       dispatch(initUserData(data));
@@ -87,11 +90,13 @@ const Register = () => {
 
     if (goodPassword && goodEmail) {
       const formatEmail = stringRemoveSpaces(email.toLowerCase());
+      setLoading(true);
       const response = await requestUserRegister({
         email: formatEmail,
         password,
         name,
       });
+      setLoading(false);
       const { status, data } = response || {};
       if (status > 0) {
         dispatch(setNavigationRoute("home"));
@@ -164,6 +169,7 @@ const Register = () => {
               {...buttonStyles}
               style={{ backgroundColor: "teal" }}
               onPress={onSubmitSignin}
+              isLoading={loading}
             >
               Sign in
             </Button>
@@ -186,6 +192,7 @@ const Register = () => {
               {...buttonStyles}
               style={{ backgroundColor: "teal" }}
               onPress={onSubmitRegister}
+              isLoading={loading}
             >
               Sign-up
             </Button>
