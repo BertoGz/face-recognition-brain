@@ -35,7 +35,7 @@ const Home = () => {
   };
 
   const calcFaceLocation = (data) => {
-    console.log(data.outputs[0].data.regions[0].region_info.bounding_box);
+    //console.log(data.outputs[0].data.regions[0].region_info.bounding_box);
     let box = data.outputs[0].data.regions[0].region_info.bounding_box;
     const image = document.getElementById("aiImage");
     const width = Number(image.width);
