@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import FaceRecognition from "../../Components/FaceRecognition";
 import ImageLinkForm from "../../Components/ImageLinkForm";
+import { setUserEntries } from "../../Redux/Actions/user";
 import { clarifai, increaseEntry } from "../../Requests";
 
-const Home = (props) => {
-  const { user } = props || {};
+const Home = () => {
+  const { user } = useSelector((state) => state);
 
+  const dispatch = useDispatch();
   const [imgUrl, setImgUrl] = useState("");
   const [boxValues, setBoxValues] = useState(null);
 
@@ -14,19 +17,15 @@ const Home = (props) => {
     clarifai({ url: input })
       .then(async (response) => {
         if (response.data) {
-          if (user?.current?.id) {
-            // go here if user is real
-            const res = await increaseEntry({ id: user.current?.id });
+          if (user?.id) {
+            // go here if user is signed up
+            const res = await increaseEntry({ id: user?.id });
             if (res.status > 0) {
-              user.setState({ ...user.current, entries: res.data });
-              console.log("helo!");
+              dispatch(setUserEntries(res.data));
             }
           } else {
             // go here if user is guest
-            user.setState({
-              ...user.current,
-              entries: user?.current?.entries + 1,
-            });
+            dispatch(setUserEntries(user?.entries + 1));
           }
         }
 
